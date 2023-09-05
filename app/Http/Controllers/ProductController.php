@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Orders;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -119,16 +120,16 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
 
-        // Delete the associated photo (if any)
-        if ($product->photo) {
-            Storage::disk('public')->delete($product->photo);
-        }
+        // Find and delete related orders
+        Orders::where('product_id', $product->id)->delete();
 
         // Delete the product from the database
         $product->delete();
 
         return redirect()->route('admin.products.index')->with('success', 'Product deleted successfully!');
     }
+
+
 
     public function edit($id)
     {

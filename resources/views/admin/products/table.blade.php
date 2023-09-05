@@ -72,6 +72,14 @@
                             <a href="{{ route('admin.products.edit', $product->id) }}"
                                 class="btn btn-sm btn-outline-primary rounded-pill border-0"><i
                                     class="bi bi-pencil"></i></a>
+                            <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="d-inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-outline-danger rounded-pill border-0"
+                                    onclick="return confirm('Are you sure you want to delete this product?')">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach

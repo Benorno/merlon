@@ -83,6 +83,7 @@ Route::middleware('auth.user')->group(function () {
     Route::get('/admin/products-list/{id}/edit', [ProductController::class, 'edit'])->name('admin.products.edit');
     Route::get('/admin/create-product', [ProductController::class, 'create'])->name('products.create');
     Route::post('/admin/products', [ProductController::class, 'store'])->name('products.store');
+    Route::delete('/admin/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
     //cateegory routes
     Route::get('/admin/categories-list', [CategoryController::class, 'table'])->name('admin.categories.index');
     Route::get('/admin/categories-list/search', [CategoryController::class, 'table'])->name('admin.categories.search');
