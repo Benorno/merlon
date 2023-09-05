@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('vat')->nullable();
             $table->string('address');
             $table->string('zip');
+            $table->enum('status', ['unfulfilled', 'estimate sent', 'fulfilled', 'voided'])->default('unfulfilled');
             $table->string('phone');
             $table->string('client_email');
             $table->text('comment')->nullable();

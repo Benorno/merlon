@@ -49,8 +49,7 @@ Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.s
 Route::get('/product/{id}/view', [ProductController::class, 'updateViews'])->name('product.view');
 Route::get('/login', [AdminController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AdminController::class, 'login'])->name('login');
-Route::get('/register', [AdminController::class, 'showRegistrationForm'])->name('register');
-Route::post('/register', [AdminController::class, 'register'])->name('register');
+
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add/{productId}', [CartController::class, 'add'])->name('cart.add');
@@ -62,13 +61,18 @@ Route::get('/orders/{id}', [OrdersController::class, 'index'])->name('orders.ind
 Route::get('/orders/create', [OrdersController::class, 'create'])->name('orders.create');
 Route::post('/orders/store', [OrdersController::class, 'store'])->name('orders.store');
 Route::get('/orders/{id}', [OrdersController::class, 'show'])->name('orders.show');
-Route::get('/orders/{id}/edit', [OrdersController::class, 'edit'])->name('orders.edit');
+
 Route::put('/orders/{id}', [OrdersController::class, 'update'])->name('orders.update');
 Route::delete('/orders/{id}', [OrdersController::class, 'destroy'])->name('orders.destroy');
 Route::post('/product/request-quote/{productId}', [OrdersController::class, 'requestQuote'])->name('product.requestQuote');
 
+Route::get('/register', [AdminController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [AdminController::class, 'register'])->name('register');
+
 
 Route::middleware('auth.user')->group(function () {
+
+
     Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/admin/help', [AdminController::class, 'help'])->name('admin.help');
@@ -91,8 +95,12 @@ Route::middleware('auth.user')->group(function () {
     Route::get('/admin/orders', [AdminDashboardController::class,'viewOrders'])->name('admin.orders');
     Route::get('/admin/orders/search', [AdminDashboardController::class,'viewOrders'])->name('admin.search');
     Route::get('/admin/order-details/{orderGroupId}', [AdminDashboardController::class,'showOrderDetails'])->name('admin.orderDetails');
+    Route::put('/admin/orders/{orderId}/update-status', [OrdersController::class, 'updateStatus'])->name('admin.orders.updateStatus');
+    Route::get('/orders/{id}/edit', [OrdersController::class, 'edit'])->name('orders.edit');
+
+    Route::get('/admin/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::put('/admin/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/admin/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
+    Route::delete('/admin/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 });
-
-
-

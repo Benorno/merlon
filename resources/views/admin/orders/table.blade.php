@@ -34,6 +34,7 @@
                         <th>Order Date</th>
                         <th>Last Name</th>
                         <th>Company Name</th>
+                        <th>Status</th>
                         <th>Total Cost</th>
                         <th>Items</th>
                     </tr>
@@ -57,6 +58,14 @@
                             <td>{{ $orderDate }}</td>
                             <td>{{ $firstOrder->last_name }}</td>
                             <td>{{ $firstOrder->company_name }}</td>
+                            <td class="fw-semibold
+                                    @if ($firstOrder->status === 'unfulfilled') text-warning
+                                    @elseif ($firstOrder->status === 'estimate sent') text-primary
+                                    @elseif ($firstOrder->status === 'fulfilled') text-success
+                                    @else text-danger @endif
+                                    text-uppercase">
+                                {{ $firstOrder->status }}
+                            </td>
                             <td>€ {{ $totalCost }}</td>
                             <td>{{ $totalProducts }}</td>
                         </tr>

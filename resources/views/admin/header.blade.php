@@ -18,7 +18,7 @@
                         {{ auth()->user()->username }}
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Staff</a></li>
+                        <li><a class="dropdown-item" href="{{ route('profile.show') }}">Profile</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin.help') }}">Help</a></li>
                         <li><a class="dropdown-item text-danger" href="{{ route('logout') }}">Logout</a></li>
                     </ul>

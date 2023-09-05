@@ -23,6 +23,7 @@ class Orders extends Model
         'comment',
         'quantity',
         'guest_id',
+        'status',
         'search_query',
     ];
 

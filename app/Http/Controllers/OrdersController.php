@@ -38,6 +38,27 @@ class OrdersController extends Controller
         return view('orders.index', compact('product', 'productId'));
     }
 
+    public function updateStatus(Request $request, $orderId)
+    {
+        // Validate the incoming request data
+        $request->validate([
+            'status' => 'required|in:unfulfilled,estimate sent,fulfilled,voided',
+        ]);
+
+        // Retrieve the order record based on $orderId
+        $orders = Orders::where('order_id', $orderId)->get();
+
+        // Update the status field with the new status value
+        $status = $request->input('status');
+        foreach ($orders as $order) {
+            $order->status = $status;
+            $order->save();
+        }
+        // dd($order);
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Status updated successfully');
+    }
+
 
 
     public function edit($id)
