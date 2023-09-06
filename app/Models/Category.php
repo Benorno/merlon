@@ -12,4 +12,10 @@ class Category extends Model
     protected $fillable = ['title', 'category_photo', 'is_hidden', 'searchQuery'];
 
 
+    public function subcategory()
+    {
+        return $this->hasMany(Subcategory::class);
+    }
+
+
 }

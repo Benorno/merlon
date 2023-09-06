@@ -16,11 +16,10 @@ class CategoryController extends Controller
         $categories = Category::all();
         return view('categories.index', compact('categories'));
     }
-
-    public function show(Subcategory $subcategory)
+    public function show(Category $category)
     {
-        $subcategories = $subcategory->categories();
-        return view('categories.show', compact('subcategories', 'subcategory'));
+        $subcategories = $category->subcategory;
+        return view('categories.show', compact('subcategories', 'category'));
     }
 
     public function table(Request $request)
