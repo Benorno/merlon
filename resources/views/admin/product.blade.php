@@ -30,12 +30,12 @@
                             class="form-control rounded-0 border-2 border-dark" required>
                     </div>
                     <div class="col-4 mb-3">
-                        <label for="category_id" class="form-label">Category <span class="text-danger">*</span></label>
-                        <select name="category_id" id="category_id" class="form-select rounded-0 border-2 border-dark"
-                            required>
-                            <option value="" disabled selected>Select a category</option>
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->title }}</option>
+                        <label for="subcategory_id" class="form-label">Subcategory <span class="text-danger">*</span></label>
+                        <select name="subcategory_id" id="subcategory_id" class="form-select rounded-0 border-2 border-dark"
+                            >
+                            <option value="" disabled selected>Select a subcategory</option>
+                            @foreach ($subcategories as $subcategory)
+                                <option value="{{ $subcategory->id }}">{{ $subcategory->title }}</option>
                             @endforeach
                         </select>
                     </div>

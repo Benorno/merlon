@@ -17,7 +17,7 @@ class Product extends Model
     'stock_quantity',
     'photo',
     'material',
-    'category_id',
+    'subcategory_id',
     'is_hidden',
     'top_width',
     'bottom_width',
@@ -31,9 +31,9 @@ class Product extends Model
     'searchQuery'
     ];
 
-    public function category()
+    public function subcategory()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Subcategory::class);
     }
 
     // If you want to establish a self-referencing relationship for related products

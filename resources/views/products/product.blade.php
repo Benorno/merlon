@@ -10,7 +10,7 @@
         <div class="container">
             <div class="row">
                 <h1>Our Products</h1>
-                <h1 class="fw-semibold text-capitalize" style="font-size: 6svw">{{ $product->name }}</h2>
+                <h1 class="fw-semibold text-capitalize" style="font-size: 4svw">{{ $product->name }}</h2>
             </div>
             <form action="{{ route('cart.add', ['productId' => $product->id]) }}" method="POST">
                 @csrf
@@ -101,7 +101,7 @@
                                     <hr>
                                 </div>
                                 <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-6 mb-3">
                                         <p class="card-text">Quantity In Box:</p>
                                     </div>
                                     <div class="col">

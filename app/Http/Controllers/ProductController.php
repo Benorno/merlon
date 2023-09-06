@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Orders;
 use App\Models\Product;
+use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -14,7 +15,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        $groupedProducts = Category::with('products')
+        $groupedProducts = Subcategory::with('products')
             ->latest()
             ->get()
             ->groupBy('title');
@@ -32,9 +33,9 @@ class ProductController extends Controller
         $mostViewedProducts = Product::where('id', '!=', $id) // Exclude the current product
             ->where('is_hidden', false)
             ->where(function ($query) {
-                $query->whereNull('category_id') // Include products with no category
-                    ->orWhereHas('category', function ($query) {
-                        $query->where('is_hidden', false); // Include products with non-hidden categories
+                $query->whereNull('subcategory_id') // Include products with no subcategory
+                    ->orWhereHas('subcategory', function ($query) {
+                        $query->where('is_hidden', false); // Include products with non-hidden subcategories
                     });
             })
             ->orderBy('views', 'desc')
@@ -57,9 +58,9 @@ class ProductController extends Controller
 
     public function create()
     {
-        $categories = Category::all();
+        $subcategories = Subcategory::all();
         $product = Product::all();
-        return view('admin.product', compact('categories', 'product'));
+        return view('admin.product', compact('subcategories', 'product'));
     }
 
     public function store(Request $request)
@@ -77,7 +78,7 @@ class ProductController extends Controller
             'description' => 'nullable',
             'price' => 'required|numeric',
             'stock_quantity' => 'required|integer',
-            'category_id' => 'required|exists:categories,id',
+            'subcategory_id' => 'required|exists:subcategories,id',
             'stockable' => 'boolean',
             'nucleated' => 'boolean',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
@@ -107,7 +108,7 @@ class ProductController extends Controller
             'description' => $request->input('description'),
             'price' => $request->input('price'),
             'stock_quantity' => $request->input('stock_quantity'),
-            'category_id' => $request->input('category_id'),
+            'subcategory_id' => $request->input('subcategory_id'),
             'stockable' => $request->input('stockable'),
             'nucleated' => $request->input('nucleated'),
             'photo' => $photoPath,
@@ -134,8 +135,8 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::findOrFail($id);
-        $categories = Category::all();
-        return view('admin.products.edit', compact('product', 'categories'));
+        $subcategories = Subcategory::all();
+        return view('admin.products.edit', compact('product', 'subcategories'));
     }
 
     public function update($id, Request $request)
@@ -156,7 +157,7 @@ class ProductController extends Controller
             'description' => 'nullable',
             'price' => 'required|numeric',
             'stock_quantity' => 'required|integer',
-            'category_id' => 'required|exists:categories,id',
+            'subcategory_id' => 'required|exists:subcategories,id',
             'is_hidden' => 'boolean',
             'stockable' => 'boolean',
             'nucleated' => 'boolean',
@@ -190,7 +191,7 @@ class ProductController extends Controller
             'description' => $request->input('description'),
             'price' => $request->input('price'),
             'stock_quantity' => $request->input('stock_quantity'),
-            'category_id' => $request->input('category_id'),
+            'subcategory_id' => $request->input('subcategory_id'),
             'is_hidden' => $request->input('is_hidden'),
             'stockable' => $request->input('stockable'),
             'nucleated' => $request->input('nucleated'),

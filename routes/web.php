@@ -7,6 +7,7 @@ use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\QuoteController;
+use App\Http\Controllers\SubcategoryController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
@@ -44,7 +45,8 @@ Route::get('/504', function () {
 Route::view('/no-product', 'no-product')->name('no-product');
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/subcategories', [SubcategoryController::class, 'index'])->name('subcategories.index');
+Route::get('/subcategories/{subcategory}', [SubcategoryController::class, 'show'])->name('subcategories.show');
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
 Route::get('/product/{id}/view', [ProductController::class, 'updateViews'])->name('product.view');
 Route::get('/login', [AdminController::class, 'showLoginForm'])->name('login');
@@ -84,7 +86,7 @@ Route::middleware('auth.user')->group(function () {
     Route::get('/admin/create-product', [ProductController::class, 'create'])->name('products.create');
     Route::post('/admin/products', [ProductController::class, 'store'])->name('products.store');
     Route::delete('/admin/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
-    //cateegory routes
+    //category routes
     Route::get('/admin/categories-list', [CategoryController::class, 'table'])->name('admin.categories.index');
     Route::get('/admin/categories-list/search', [CategoryController::class, 'table'])->name('admin.categories.search');
     Route::get('/admin/category/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
@@ -92,13 +94,21 @@ Route::middleware('auth.user')->group(function () {
     Route::delete('/admin/category/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
     Route::get('/admin/category/create', [CategoryController::class, 'create'])->name('categories.create');
     Route::post('/admin/category', [CategoryController::class, 'store'])->name('categories.store');
-
+    //subcategory routes
+    Route::get('/admin/subcategories-list', [SubcategoryController::class, 'table'])->name('admin.subcategories.index');
+    Route::get('/admin/subcategories-list/search', [SubcategoryController::class, 'table'])->name('admin.subcategories.search');
+    Route::get('/admin/subcategory/{subcategory}/edit', [SubcategoryController::class, 'edit'])->name('subcategories.edit');
+    Route::put('/admin/subcategory/{subcategory}', [SubcategoryController::class, 'update'])->name('subcategories.update');
+    Route::delete('/admin/subcategory/{subcategory}', [SubcategoryController::class, 'destroy'])->name('subcategories.destroy');
+    Route::get('/admin/subcategory/create', [SubcategoryController::class, 'create'])->name('subcategories.create');
+    Route::post('/admin/subcategory', [SubcategoryController::class, 'store'])->name('subcategories.store');
+    //order routes
     Route::get('/admin/orders', [AdminDashboardController::class,'viewOrders'])->name('admin.orders');
     Route::get('/admin/orders/search', [AdminDashboardController::class,'viewOrders'])->name('admin.search');
     Route::get('/admin/order-details/{orderGroupId}', [AdminDashboardController::class,'showOrderDetails'])->name('admin.orderDetails');
     Route::put('/admin/orders/{orderId}/update-status', [OrdersController::class, 'updateStatus'])->name('admin.orders.updateStatus');
     Route::get('/orders/{id}/edit', [OrdersController::class, 'edit'])->name('orders.edit');
-
+    //admin profile routes
     Route::get('/admin/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::put('/admin/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/admin/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');

@@ -53,8 +53,8 @@
                         <td>{{ $product->product_code }}</td>
                         <td>{{ $product->name }}</td>
                         <td>
-                            @if ($product->category)
-                                {{ $product->category->title }}
+                            @if ($product->subcategory)
+                                {{ $product->subcategory->title }}
                             @else
                                 <span class="text-danger text-uppercase fw-semibold">not assigned</span>
                             @endif

@@ -42,14 +42,14 @@
                                     class="form-control rounded-0 border-2 border-dark" required>
                             </div>
                             <div class="col-4 mb-3">
-                                <label for="category_id" class="form-label">Category</label>
+                                <label for="category_id" class="form-label">Subcategory</label>
                                 <select name="category_id" id="category_id"
                                     class="form-select rounded-0 border-2 border-dark" required>
-                                    <option value="" disabled selected>Select a category</option>
-                                    @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}"
-                                            {{ old('category_id', $product->category_id) == $category->id ? 'selected' : '' }}>
-                                            {{ $category->title }}
+                                    <option value="" disabled selected>Select a subcategory</option>
+                                    @foreach ($subcategories as $subcategory)
+                                        <option value="{{ $subcategory->id }}"
+                                            {{ old('subcategory_id', $product->subcategory_id) == $subcategory->id ? 'selected' : '' }}>
+                                            {{ $subcategory->title }}
                                         </option>
                                     @endforeach
                                 </select>

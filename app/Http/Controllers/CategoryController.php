@@ -81,12 +81,26 @@ class CategoryController extends Controller
         $request->validate([
             'title' => 'required',
             'is_hidden' => 'boolean',
+            'category_photo' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
         ]);
 
+        if ($request->hasFile('category_photo')) {
+            // Delete old photo if it exists
+            if ($category->category_photo) {
+                Storage::disk('public')->delete($category->category_photo);
+            }
+
+            $originalFileName = $request->file('category_photo')->getClientOriginalName();
+            $categoryPhotoPath = $request->file('category_photo')->storeAs('category_photo', $originalFileName, 'public');
+        } else {
+            // No new photo provided, keep the existing one
+            $categoryPhotoPath = $category->category_photo;
+        }
 
         $category->update([
             'title' => $request->input('title'),
             'is_hidden' => $request->input('is_hidden'),
+            'category_photo' => $categoryPhotoPath,
         ]);
 
         return redirect()->route('admin.categories.index')->with('success', 'Category updated successfully!');
