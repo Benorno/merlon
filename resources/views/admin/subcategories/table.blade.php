@@ -34,6 +34,7 @@
                     <th>ID</th>
                     <th>Photo</th>
                     <th>Title</th>
+                    <th>Parent</th>
                     <th>Is Hidden</th>
                     <th>Actions</th>
                 </tr>
@@ -43,9 +44,18 @@
                     <tr>
                         <td>{{ $subcategory->id }}</td>
                         <th><a href="{{ route('subcategories.edit', $subcategory->id) }}"><img
-                                    src="{{ asset('storage/' . $subcategory->subcategory_photo) }}" class="card-img-top rounded-0"
-                                    alt="{{ $subcategory->title }}" style="width: 25px"></a></th>
+                                    src="{{ asset('storage/' . $subcategory->subcategory_photo) }}"
+                                    class="card-img-top rounded-0" alt="{{ $subcategory->title }}" style="width: 25px"></a>
+                        </th>
                         <td>{{ $subcategory->title }}</td>
+                        <td>
+                            @if ($subcategory->categories)
+                                {{ $subcategory->categories->title }}
+                            @else
+                                <span class="text-danger text-uppercase fw-semibold">not assigned</span>
+                            @endif
+                        </td>
+
                         <td>
                             @if ($subcategory->is_hidden)
                                 <span class="text-danger"><i class="bi bi-eye-slash"></i> Hidden</span>
@@ -57,7 +67,8 @@
                             <a href="{{ route('subcategories.edit', $subcategory->id) }}"
                                 class="btn btn-sm btn-outline-primary rounded-pill border-0"><i class="bi bi-pencil"></i>
                             </a>
-                            <form action="{{ route('subcategories.destroy', $subcategory->id) }}" method="POST" class="d-inline">
+                            <form action="{{ route('subcategories.destroy', $subcategory->id) }}" method="POST"
+                                class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-outline-danger rounded-pill border-0"

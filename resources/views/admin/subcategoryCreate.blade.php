@@ -32,6 +32,16 @@
                     <input type="file" class="form-control rounded-0 border-2 border-dark" id="subcategory_photo"
                             name="subcategory_photo" required>
                 </div>
+                <div class="mb-3">
+                        <label for="category_id" class="form-label">Category <span class="text-danger">*</span></label>
+                        <select name="category_id" id="category_id" class="form-select rounded-0 border-2 border-dark"
+                            >
+                            <option value="" disabled selected>Select a category</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-outline-primary rounded-0 fw-semibold border-2"
                         style="width: 350px">Create Subcategory</button>

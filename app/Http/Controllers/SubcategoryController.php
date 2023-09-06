@@ -25,11 +25,10 @@ class SubcategoryController extends Controller
 
     public function table(Request $request)
     {
-        // $subcategories = Subcategory::all(); // Fetch all categories
-
         $searchQuery = $request->input('search_query');
 
         $query = Subcategory::orderBy('id', 'asc');
+        $categories = Category::all(); // Change variable name to $categories
 
         if ($searchQuery) {
             $query->where(function ($query) use ($searchQuery) {
@@ -39,13 +38,16 @@ class SubcategoryController extends Controller
 
         $subcategories = $query->get();
 
-        return view('admin.subcategories.table', compact('subcategories', 'searchQuery'));
+        return view('admin.subcategories.table', compact('subcategories', 'categories', 'searchQuery')); // Change variable name to 'categories'
     }
+
 
 
     public function create()
     {
-        return view('admin.subcategoryCreate');
+        $categories = Category::all();
+        $subcategory = Subcategory::all();
+        return view('admin.subcategoryCreate', compact('subcategory', 'categories'));
     }
 
     public function store(Request $request)
@@ -53,6 +55,7 @@ class SubcategoryController extends Controller
         $request->validate([
             'title' => 'required|string',
             'subcategory_photo' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'category_id' => 'required|exists:categories,id',
         ]);
 
         $subcategoryPhotoPath = null;
@@ -66,24 +69,29 @@ class SubcategoryController extends Controller
         Subcategory::create([
             'title' => $request->input('title'),
             'subcategory_photo' => $subcategoryPhotoPath,
+            'category_id' => $request->input('category_id'),
         ]);
 
         return redirect()->route('admin.subcategories.index')->with('success', 'Category created successfully!');
     }
 
 
-    public function edit(Subcategory $subcategory)
+    public function edit($id)
     {
-        return view('admin.subcategories.edit', compact('subcategory'));
+        $categories = Category::all();
+        $subcategory = Subcategory::findOrFail($id);
+        return view('admin.subcategories.edit', compact('subcategory', 'categories'));
     }
 
-    public function update(Subcategory $subcategory, Request $request)
+    public function update($id, Subcategory $subcategory, Request $request)
     {
+        $subcategory = Subcategory::findOrFail($id);
 
         $request->validate([
             'title' => 'required',
             'is_hidden' => 'boolean',
             'subcategory_photo' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'category_id' => 'required|exists:categories,id',
         ]);
 
         if ($request->hasFile('subcategory_photo')) {
@@ -102,6 +110,7 @@ class SubcategoryController extends Controller
         $subcategory->update([
             'title' => $request->input('title'),
             'is_hidden' => $request->input('is_hidden'),
+            'category_id' => $request->input('category_id'),
             'subcategory_photo' => $subcategoryPhotoPath,
         ]);
 

@@ -10,7 +10,7 @@
                 <a href="{{ route('admin.orders') }}" class="btn btn-outline-light rounded-0 border-2 fw-semibold">Order Requests</a>
                 <a href="{{ route('admin.products.index') }}" class="btn btn-outline-light rounded-0 border-2 fw-semibold mx-2">Products</a>
                 <a href="{{ route('admin.categories.index') }}" class="btn btn-outline-light rounded-0 border-2 fw-semibold">Categories</a>
-                <a href="{{ route('admin.subcategories.index') }}" class="btn btn-outline-light rounded-0 border-2 fw-semibold mx-2">Subategories</a>
+                <a href="{{ route('admin.subcategories.index') }}" class="btn btn-outline-light rounded-0 border-2 fw-semibold mx-2">Subcategories</a>
             </div>
             <div class="col-2 mt-3">
                 <div class="dropdown">

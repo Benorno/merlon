@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -16,10 +17,10 @@ class CategoryController extends Controller
         return view('categories.index', compact('categories'));
     }
 
-    public function show(Category $category)
+    public function show(Subcategory $subcategory)
     {
-        $products = $category->products;
-        return view('categories.show', compact('category', 'products'));
+        $subcategories = $subcategory->categories();
+        return view('categories.show', compact('subcategories', 'subcategory'));
     }
 
     public function table(Request $request)

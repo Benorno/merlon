@@ -97,8 +97,8 @@ Route::middleware('auth.user')->group(function () {
     //subcategory routes
     Route::get('/admin/subcategories-list', [SubcategoryController::class, 'table'])->name('admin.subcategories.index');
     Route::get('/admin/subcategories-list/search', [SubcategoryController::class, 'table'])->name('admin.subcategories.search');
-    Route::get('/admin/subcategory/{subcategory}/edit', [SubcategoryController::class, 'edit'])->name('subcategories.edit');
-    Route::put('/admin/subcategory/{subcategory}', [SubcategoryController::class, 'update'])->name('subcategories.update');
+    Route::get('/admin/subcategory/{id}/edit', [SubcategoryController::class, 'edit'])->name('subcategories.edit');
+    Route::put('/admin/subcategory/{id}', [SubcategoryController::class, 'update'])->name('subcategories.update');
     Route::delete('/admin/subcategory/{subcategory}', [SubcategoryController::class, 'destroy'])->name('subcategories.destroy');
     Route::get('/admin/subcategory/create', [SubcategoryController::class, 'create'])->name('subcategories.create');
     Route::post('/admin/subcategory', [SubcategoryController::class, 'store'])->name('subcategories.store');

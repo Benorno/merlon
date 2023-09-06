@@ -5,7 +5,7 @@
                 Virtualy <br>unbreakable<br> glassware
             </h1>
             <div class="row">
-                <a href="{{ route('products.index') }}"
+                <a href="{{ route('categories.index') }}"
                     class="btn btn-outline-dark border-2 rounded-0 fw-semibold col-5 ms-3 fs-5">Our
                     Products</a>
                 <a href="{{ route('about') }}" class="btn btn-outline-dark border-2 rounded-0 fw-semibold col-5 ms-3 fs-5">About
@@ -25,7 +25,7 @@
                 Virtualy <br>unbreakable<br> glassware
             </h1>
             <div class="row">
-                <a href="{{ route('products.index') }}"
+                <a href="{{ route('categories.index') }}"
                     class="btn btn-outline-dark border-2 rounded-0 fw-semibold col-10 mb-3 ms-3 fs-5">Our
                     Products</a>
                 <a href="{{ route('about') }}" class="btn btn-outline-dark border-2 rounded-0 fw-semibold col-10 ms-3 fs-5">About
@@ -45,7 +45,7 @@
                 Virtualy <br>unbreakable<br> glassware
             </h1>
             <div class="row">
-                <a href="{{ route('products.index') }}"
+                <a href="{{ route('categories.index') }}"
                     class="btn btn-outline-dark border-2 rounded-0 fw-semibold ms-5 col-9 mb-3 fs-5">Our
                     Products</a>
                 <a href="{{ route('about') }}" class="btn btn-outline-dark border-2 rounded-0 fw-semibold ms-5 col-9 fs-5">About
