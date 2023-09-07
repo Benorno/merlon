@@ -129,7 +129,7 @@
                     <div class="d-none d-md-block mt-5">
                         <h3>Functions</h3>
                         <br>
-                        <a href="#" class="btn btn-outline-secondary rounded-0 border-2 fw-semibold">Edit Order</a>
+                        {{-- <a href="#" class="btn btn-outline-secondary rounded-0 border-2 fw-semibold">Edit Order</a> --}}
                         <br>
                         <button class="btn btn-outline-primary my-3 rounded-0 border-2 fw-semibold" data-bs-toggle="modal"
                             data-bs-target="#ModalStatus">Change

@@ -12,20 +12,19 @@ class AdminDashboardController extends Controller
 {
     public function index(Request $request)
     {
-
         $searchQuery = $request->input('search_query');
 
         $query = Product::orderBy('id', 'asc');
-        $products = Product::all();
 
         if ($searchQuery) {
             $query->where(function ($query) use ($searchQuery) {
                 $query->where('product_code', 'like', '%' . $searchQuery . '%')
-                ->orWhere('name', 'like', '%' . $searchQuery . '%');
+                    ->orWhere('name', 'like', '%' . $searchQuery . '%');
             });
         }
 
-        $products = $query->get();
+        // Use the paginate method to retrieve a paginated list of products
+        $products = Product::paginate(15); // 15 products per page
 
         return view('admin.products.table', compact('products', 'searchQuery'));
     }

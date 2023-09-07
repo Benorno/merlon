@@ -25,6 +25,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home.index');
 });
+Route::get('/privacy-policy', function () {
+    return view('privacy-policy');
+});
+Route::get('/returns-policy', function () {
+    return view('returns');
+});
+Route::get('/terms-conditions', function () {
+    return view('terms');
+});
 Route::get('/contact-us', function () {
     return view('contacts');
 })->name('contacts');

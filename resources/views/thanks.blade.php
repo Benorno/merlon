@@ -12,7 +12,7 @@
                 <h1>Thank You.</h1>
                 <p>We'll send You and estimate shortly!</p>
                 <div class="mt-4">
-                    <a href="{{ route('products.index') }}" class="btn btn-outline-dark rounded-0 border-2 fw-semibold">See other products</a>
+                    <a href="{{ route('categories.index') }}" class="btn btn-outline-dark rounded-0 border-2 fw-semibold">See other products</a>
                 </div>
             </div>
         </div>

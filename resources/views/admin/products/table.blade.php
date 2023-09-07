@@ -85,5 +85,8 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="float-end">
+            {{-- {{ $products->links() }} --}}
+        </div>
     </main>
 @endsection
